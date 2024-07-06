@@ -1,0 +1,61 @@
+diff --git a/BoardConfigCommon.mk b/BoardConfigCommon.mk
+index e402928..66ccb5d 100644
+--- a/BoardConfigCommon.mk
++++ b/BoardConfigCommon.mk
+@@ -71,7 +71,7 @@ DEVICE_MATRIX_FILE := $(COMMON_PATH)/hidl/compatibility_matrix.xml
+ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+     $(COMMON_PATH)/hidl/vendor_framework_compatibility_matrix.xml \
+     $(COMMON_PATH)/hidl/xiaomi_framework_compatibility_matrix.xml \
+-    vendor/derp/config/device_framework_matrix.xml
++    vendor/aosp/config/device_framework_matrix.xml
+ 
+ DEVICE_MANIFEST_FILE := \
+     $(COMMON_PATH)/hidl/manifest_lahaina.xml \
+diff --git a/audio/audio_effects.xml b/audio/audio_effects.xml
+index 1d1a967..a87ae29 100644
+--- a/audio/audio_effects.xml
++++ b/audio/audio_effects.xml
+@@ -53,6 +53,7 @@
+         <!--DOLBY VQE-->
+         <library name="vqe" path="libswvqe.so"/>
+         <!--DOLBY END-->
++        <library name="v4a_re" path="libv4a_re.so"/>
+     </libraries>
+     <effects>
+         <effectProxy name="bassboost" library="proxy" uuid="14804144-a5ee-4d24-aa88-0002a5d5c51b">
+@@ -110,6 +111,7 @@
+         <!--DOLBY VQE-->
+         <effect name="vqe" library="vqe" uuid="64a0f614-7fa4-48b8-b081-d59dc954616f"/>
+         <!--DOLBY END-->
++        <effect name="v4a_standard_re" library="v4a_re" uuid="90380da3-8536-4744-a6a3-5731970e640f"/>
+     </effects>
+     <postprocess>
+         <stream type="music">
+diff --git a/common.mk b/common.mk
+index ff89f1f..88b2691 100644
+--- a/common.mk
++++ b/common.mk
+@@ -23,6 +23,9 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
+ # Add common definitions for Qualcomm
+ $(call inherit-product, hardware/qcom-caf/common/common.mk)
+ 
++# MiuiCamera
++$(call inherit-product, vendor/xiaomi/miuicamera/config.mk)
++
+ # API
+ PRODUCT_SHIPPING_API_LEVEL := 30
+ 
+diff --git a/sepolicy/vendor/hal_audio_default.te b/sepolicy/vendor/hal_audio_default.te
+index 97a9154..6a86ed6 100644
+--- a/sepolicy/vendor/hal_audio_default.te
++++ b/sepolicy/vendor/hal_audio_default.te
+@@ -5,3 +5,8 @@ set_prop(hal_audio_default, vendor_audio_prop)
+ 
+ allow hal_audio_default audio_socket:sock_file rw_file_perms;
+ allow hal_audio_default sound_device:chr_file rw_file_perms;
++
++get_prop(audioserver, vendor_audio_prop)
++
++allow audioserver unlabeled:file { read write open getattr };
++allow hal_audio_default hal_audio_default:process { execmem };
+\ No newline at end of file

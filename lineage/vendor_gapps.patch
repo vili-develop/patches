@@ -1,0 +1,33 @@
+diff --git a/arm/proprietary/system_ext/priv-app/SetupWizard/SetupWizard.apk b/arm/proprietary/system_ext/priv-app/SetupWizard/SetupWizard.apk
+old mode 100755
+new mode 100644
+diff --git a/build/gapps.sh b/build/gapps.sh
+old mode 100755
+new mode 100644
+diff --git a/cicd/verify-permissions.py b/cicd/verify-permissions.py
+old mode 100755
+new mode 100644
+diff --git a/extract-files.sh b/extract-files.sh
+old mode 100755
+new mode 100644
+diff --git a/overlay/build_overlays.sh b/overlay/build_overlays.sh
+old mode 100755
+new mode 100644
+diff --git a/setup-makefiles.sh b/setup-makefiles.sh
+old mode 100755
+new mode 100644
+diff --git a/toybox-arm b/toybox-arm
+old mode 100755
+new mode 100644
+diff --git a/toybox-arm64 b/toybox-arm64
+old mode 100755
+new mode 100644
+diff --git a/toybox-x86 b/toybox-x86
+old mode 100755
+new mode 100644
+diff --git a/toybox-x86_64 b/toybox-x86_64
+old mode 100755
+new mode 100644
+diff --git a/x86/proprietary/product/lib/libjni_latinimegoogle.so b/x86/proprietary/product/lib/libjni_latinimegoogle.so
+old mode 100755
+new mode 100644
